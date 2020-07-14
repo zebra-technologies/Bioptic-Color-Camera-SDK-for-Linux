@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ZebraCameraDemo" />
+		<Option pch_mode="0" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/Release/ZebraCameraDemo" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="zebracam/inc" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="zebracam/lib/libzebracam.so" />
+					<Add directory="zebracam/lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="`wx-config --cflags`" />
+			<Add option="-Winvalid-pch" />
+			<Add option="-include wx_pch.h" />
+			<Add option="-DWX_PRECOMP" />
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+			<Add option="`wx-config --libs`" />
+		</Linker>
+		<Unit filename="CameraFirmwareDownload.cpp" />
+		<Unit filename="CameraFirmwareDownload.h" />
+		<Unit filename="CameraImageEvents.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="CameraImageEvents.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="CameraPlugAndPlay.cpp" />
+		<Unit filename="CameraPlugAndPlay.h" />
+		<Unit filename="DemoCameraTerminalControls.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="DemoExtensionUnit1Controls.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="DemoFirmwareControls.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="DemoImageEventControls.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="DemoMiscControls.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="DemoProcessingUnitControls.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ImageBuffer.cpp" />
+		<Unit filename="ImageBuffer.h" />
+		<Unit filename="VideoPanel.cpp" />
+		<Unit filename="VideoPanel.h" />
+		<Unit filename="ZebraCameraDemoApp.cpp" />
+		<Unit filename="ZebraCameraDemoApp.h" />
+		<Unit filename="ZebraCameraDemoMain.cpp" />
+		<Unit filename="ZebraCameraDemoMain.h" />
+		<Unit filename="wx_pch.h">
+			<Option compile="1" />
+			<Option weight="0" />
+		</Unit>
+		<Unit filename="wxsmith/ZebraCameraDemoframe.wxs" />
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="ZebraCameraDemoApp.cpp" main="ZebraCameraDemoFrame" init_handlers="necessary" language="CPP" />
+				<resources>
+					<wxFrame wxs="wxsmith/ZebraCameraDemoframe.wxs" src="ZebraCameraDemoMain.cpp" hdr="ZebraCameraDemoMain.h" fwddecl="0" i18n="1" name="ZebraCameraDemoFrame" language="CPP" />
+				</resources>
+			</wxsmith>
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
