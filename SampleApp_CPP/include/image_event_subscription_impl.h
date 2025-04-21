@@ -1,5 +1,5 @@
 /*
- * Author: (c)2020 Zebra Technologies Corp. and/or affiliates. All rights reserved.
+ * Author: (c)2022 Zebra Technologies Corp. and/or affiliates. All rights reserved.
  * Created on March 31, 2020, 10:08 AM
  */
 
@@ -15,7 +15,7 @@
 #include "image_event_subscriber.h"
 #include "image_event.h"
 
-class ZebraCameraDemoFrame;
+class BiopticColorCameraDemoFrame;
 
 
 /**
@@ -30,7 +30,7 @@ class ImageEventSubscriberSample : public ImageEventSubscriber {
         /**
          * Constructor, initializes ImageEventSubscriberSample class variables
          */
-        ImageEventSubscriberSample(ZebraCameraDemoFrame *frame);
+        ImageEventSubscriberSample(BiopticColorCameraDemoFrame *frame);
 
         /**
          * Sample implementation of the pure virtual method RecieveImageEvents
@@ -40,7 +40,7 @@ class ImageEventSubscriberSample : public ImageEventSubscriber {
         void RecieveImageEvents(ImageCreationEvent *image_creation_event);
 
     private:
-        ZebraCameraDemoFrame *demo_ui_frame_demo_ui_frame_;
+        BiopticColorCameraDemoFrame *demo_ui_frame_demo_ui_frame_;
 };
 
 

@@ -12,7 +12,7 @@
 #include <wx/image.h>
 
 #include "wx_pch.h"
-#include "ZebraCameraDemoMain.h"
+#include "BiopticColorCameraDemoMain.h"
 //*)
 
 IMPLEMENT_APP(ZebraCameraDemoApp);
@@ -24,7 +24,7 @@ bool ZebraCameraDemoApp::OnInit()
     wxInitAllImageHandlers();
     if ( wxsOK )
     {
-    	ZebraCameraDemoFrame* Frame = new ZebraCameraDemoFrame(0);
+    	BiopticColorCameraDemoFrame* Frame = new BiopticColorCameraDemoFrame(0);
     	Frame->Show();
     	SetTopWindow(Frame);
     }

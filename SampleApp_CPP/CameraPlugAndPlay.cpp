@@ -1,12 +1,22 @@
-/*
-    Plug-and-play listener implementation.
-*/
+/***************************************************************
+ * Name:      CameraPlugAndPlay.cpp
+ * Purpose:   Implementation for plug and play event listeners.
+              Implementation to add camera to camera arrived queue during attachement and create camera selected event.
+              Implementation to dd camera to camera left queue during detachement and create camera deselected event.
+ * Author:     ()
+ * Created:   2021-03-01
+ * Copyright: ©2022 Zebra Technologies Corp. and/or its affiliates.  All rights reserved
+ * License:
+ **************************************************************/
+
+
+
 
 #include "CameraPlugAndPlay.h"
 
 #include <string>
 
-#include "ZebraCameraDemoMain.h"
+#include "BiopticColorCameraDemoMain.h"
 
 // Definition of the CAMERA_SELECTED_EVENT
 wxDEFINE_EVENT(CAMERA_SELECTED_EVENT, wxCommandEvent);
@@ -15,7 +25,7 @@ wxDEFINE_EVENT(CAMERA_SELECTED_EVENT, wxCommandEvent);
 wxDEFINE_EVENT(CAMERA_DESELECTED_EVENT, wxCommandEvent);
 
 
-AttachedEventObserver::AttachedEventObserver(ZebraCameraDemoFrame *frame):
+AttachedEventObserver::AttachedEventObserver(BiopticColorCameraDemoFrame *frame):
     frame_(frame)
 {
     wxLogMessage("%s", __func__);
@@ -28,7 +38,7 @@ void AttachedEventObserver::Attached(zebra::DeviceInfo info)
     frame_->QueueCameraArrivedEvent(info);
 }
 
-DetachedEventObserver::DetachedEventObserver(ZebraCameraDemoFrame *frame):
+DetachedEventObserver::DetachedEventObserver(BiopticColorCameraDemoFrame *frame):
     frame_(frame)
 {
     wxLogMessage("%s", __func__);
@@ -37,19 +47,19 @@ DetachedEventObserver::DetachedEventObserver(ZebraCameraDemoFrame *frame):
 void DetachedEventObserver::Detached(zebra::DeviceInfo info)
 {
     wxLogMessage("%s: SN: %s, (%s)", __func__, info.serial_number, info.device_path);
-
+    frame_->ResetFirmwareUpdateProgressBar();
     frame_->QueueCameraLeftEvent(info);
 }
 
-void ZebraCameraDemoFrame::CreatePnpListeners()
+void BiopticColorCameraDemoFrame::CreatePnpListeners()
 {
     wxLogMessage("%s", __func__);
 
     // Bind camera-selected listener
-    Bind(CAMERA_SELECTED_EVENT, &ZebraCameraDemoFrame::OnCameraArrivedEvent, this);
+    Bind(CAMERA_SELECTED_EVENT, &BiopticColorCameraDemoFrame::OnCameraArrivedEvent, this);
 
     // Bind camera-deselected listener
-    Bind(CAMERA_DESELECTED_EVENT, &ZebraCameraDemoFrame::OnCameraLeftEvent, this);
+    Bind(CAMERA_DESELECTED_EVENT, &BiopticColorCameraDemoFrame::OnCameraLeftEvent, this);
 
     attached_listener_ = new AttachedEventObserver(this);
     detached_listener_ = new DetachedEventObserver(this);
@@ -59,7 +69,7 @@ void ZebraCameraDemoFrame::CreatePnpListeners()
 }
 
 
-void ZebraCameraDemoFrame::ReleasePnpListeners()
+void BiopticColorCameraDemoFrame::ReleasePnpListeners()
 {
     wxLogMessage("%s", __func__);
 
@@ -75,13 +85,13 @@ void ZebraCameraDemoFrame::ReleasePnpListeners()
     }
 
     // Unbind camera-selected listener
-    Unbind(CAMERA_SELECTED_EVENT, &ZebraCameraDemoFrame::OnCameraArrivedEvent, this);
+    Unbind(CAMERA_SELECTED_EVENT, &BiopticColorCameraDemoFrame::OnCameraArrivedEvent, this);
 
     // Unbind camera-deselected listener
-    Unbind(CAMERA_DESELECTED_EVENT, &ZebraCameraDemoFrame::OnCameraLeftEvent, this);
+    Unbind(CAMERA_DESELECTED_EVENT, &BiopticColorCameraDemoFrame::OnCameraLeftEvent, this);
 }
 
-void ZebraCameraDemoFrame::QueueCameraArrivedEvent(zebra::DeviceInfo info)
+void BiopticColorCameraDemoFrame::QueueCameraArrivedEvent(zebra::DeviceInfo info)
 {
     wxLogMessage("%s", __func__);
 
@@ -90,16 +100,17 @@ void ZebraCameraDemoFrame::QueueCameraArrivedEvent(zebra::DeviceInfo info)
     QueueEvent(event);
 }
 
-void ZebraCameraDemoFrame::QueueCameraLeftEvent(zebra::DeviceInfo info)
+void BiopticColorCameraDemoFrame::QueueCameraLeftEvent(zebra::DeviceInfo info)
 {
     wxLogMessage("%s", __func__);
-
+    ResetFirmwareUpdateProgressBar();
     wxCommandEvent *event = new wxCommandEvent(CAMERA_DESELECTED_EVENT, GetId());
     event->SetClientData(new zebra::DeviceInfo(info));
     QueueEvent(event);
 }
 
-void ZebraCameraDemoFrame::QueueAlreadyAttachedCameraEvents()
+//Get device information of attached camera devices
+void BiopticColorCameraDemoFrame::QueueAlreadyAttachedCameraEvents()
 {
 	wxLogMessage("%s", __func__);
 
@@ -110,7 +121,7 @@ void ZebraCameraDemoFrame::QueueAlreadyAttachedCameraEvents()
 	}
 }
 
-void ZebraCameraDemoFrame::OnCameraArrivedEvent(wxCommandEvent& event)
+void BiopticColorCameraDemoFrame::OnCameraArrivedEvent(wxCommandEvent& event)
 {
 
     wxLogMessage("%s", __func__);
@@ -124,19 +135,19 @@ void ZebraCameraDemoFrame::OnCameraArrivedEvent(wxCommandEvent& event)
             *client_data = new std::pair<zebra::DeviceInfo, std::shared_ptr<ZebraCameraClient>>
             (*info, nullptr);
 
-        // Add this to the choice list.
         std::string item_name = client_data->first.device_path;
-        ChoiceSelectedCamera->Append(wxString(item_name.c_str()), client_data);
+        choice_camera_id->Append(wxString(item_name.c_str()), client_data);
 
-        if (wxNOT_FOUND == ChoiceSelectedCamera->GetSelection())
+        if (wxNOT_FOUND == choice_camera_id->GetSelection())
         {
-            // We have a new camera and nothing has been selected yet, so select the newly arrived camera.
+            // Select the newly arrived camera.
             try
             {
-                client_data->second = camera_manager_client_->CreateZebraCamera(client_data->first);    // Create the camera.
-                ChoiceSelectedCamera->SetSelection(ChoiceSelectedCamera->GetCount() - 1);       // Set it as the current selection.
+                client_data->second = camera_manager_client_->CreateZebraCamera(client_data->first);    
+                choice_camera_id->SetSelection(choice_camera_id->GetCount() - 1);      
 
                 PopulateCameraProperties(client_data->second);
+                EventLog("Camera ATTACHED ");
             }
             catch (std::exception& e)
             {
@@ -147,29 +158,30 @@ void ZebraCameraDemoFrame::OnCameraArrivedEvent(wxCommandEvent& event)
 
 }
 
-void ZebraCameraDemoFrame::OnCameraLeftEvent(wxCommandEvent& event)
+void BiopticColorCameraDemoFrame::OnCameraLeftEvent(wxCommandEvent& event)
 {
 
     wxLogMessage("%s", __func__);
 
     zebra::DeviceInfo *info = (zebra::DeviceInfo*)event.GetClientData();
-    unsigned int selected = ChoiceSelectedCamera->GetSelection();
+    unsigned int selected = choice_camera_id->GetSelection();
 
     if (info)
     {
         wxLogMessage("%s: vid=%x, pid=%x, sn=%s, path=%s, selected=%d",
         __func__, info->vid, info->pid, info->serial_number, info->device_path, selected);
 
-        for (unsigned int i = 0; i < ChoiceSelectedCamera->GetCount(); i++)
+        for (unsigned int i = 0; i < choice_camera_id->GetCount(); i++)
         {
             std::pair<zebra::DeviceInfo, std::shared_ptr<ZebraCameraClient>>
                 *client_data = (std::pair<zebra::DeviceInfo, std::shared_ptr<ZebraCameraClient>>*)
-                                ChoiceSelectedCamera->GetClientData(i);
+                                choice_camera_id->GetClientData(i);
             if (client_data->first.device_path == info->device_path)
             {
                 wxLogMessage("%s: camera left %d", __func__, i);
+                EventLog("Camera DETACHED ");
 
-                // If this is the currently selected camera, then release it.
+                // Release currently selected camera
                 if (i == selected)
                 {
                     
@@ -181,13 +193,12 @@ void ZebraCameraDemoFrame::OnCameraLeftEvent(wxCommandEvent& event)
                 	 * So, if we do this last (i.e. before ClearAllCameraProperties), old values will be set to the camera
                 	 * if the detach cause is a reboot.
                      */
-                    
+                    ResetFirmwareUpdateProgressBar();
                     ClearAllCameraProperties();
 
                     client_data->second = nullptr;
                 }
-                // Delete the item.
-                ChoiceSelectedCamera->Delete(i);
+                choice_camera_id->Delete(i);
                 break;
             }
         }

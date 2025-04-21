@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
-	<object class="wxFrame" name="ZebraCameraDemoFrame">
+	<object class="wxFrame" name="BiopticColorCameraDemoFrame">
 		<id_arg>0</id_arg>
 		<handler function="OnClose" entry="EVT_CLOSE" />
 		<object class="wxBoxSizer" variable="BoxSizerMain" member="no">
@@ -201,7 +201,7 @@
 																	<object class="notebookpage">
 																		<object class="wxScrolledWindow" name="ID_SCROLLEDWINDOW1" variable="ScrolledWindow1" member="yes">
 																			<object class="wxFlexGridSizer" variable="FlexGridSizer3" member="no">
-																				<cols>4</cols>
+																				<cols>8</cols>
 																				<object class="sizeritem">
 																					<object class="wxStaticText" name="ID_STATICTEXT8" variable="StaticText2" member="yes">
 																						<label>Brightness</label>
@@ -212,7 +212,7 @@
 																				</object>
 																				<object class="sizeritem">
 																					<object class="wxSlider" name="ID_SLIDER_BRIGHTNESS" variable="SliderBrightness" member="yes">
-																						<size>200,30</size>
+																						<size>130,30</size>
 																						<validator>wxGenericValidator(&amp;property__brightness)</validator>
 																						<handler function="OnSliderBrightnessCmdScrollChanged" entry="EVT_COMMAND_SCROLL_CHANGED" />
 																					</object>
@@ -223,6 +223,7 @@
 																				<object class="sizeritem">
 																					<object class="wxTextCtrl" name="ID_TEXTCTRL_BRIGHTNESS" variable="TextCtrlBrightness" member="yes">
 																						<validator>wxIntegerValidator&lt;int&gt;(&amp;property__brightness)</validator>
+																						<size>60,28</size>
 																						<handler function="OnTextCtrlBrightnessText" entry="EVT_TEXT" />
 																					</object>
 																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -244,7 +245,7 @@
 																				</object>
 																				<object class="sizeritem">
 																					<object class="wxSlider" name="ID_SLIDER_CONTRAST" variable="SliderContrast" member="yes">
-																						<size>200,30</size>
+																						<size>130,30</size>
 																						<validator>wxGenericValidator(&amp;property__contrast)</validator>
 																						<handler function="OnSliderContrastCmdScrollChanged" entry="EVT_COMMAND_SCROLL_CHANGED" />
 																					</object>
@@ -255,6 +256,7 @@
 																				<object class="sizeritem">
 																					<object class="wxTextCtrl" name="ID_TEXTCTRL_CONTRAST" variable="TextCtrlContrast" member="yes">
 																						<validator>wxIntegerValidator&lt;int&gt;(&amp;property__contrast)</validator>
+																						<size>60,28</size>
 																						<handler function="OnTextCtrlContrastText" entry="EVT_TEXT" />
 																					</object>
 																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -280,7 +282,7 @@
 																				</object>
 																				<object class="sizeritem">
 																					<object class="wxSlider" name="ID_SLIDER_SATURATION" variable="SliderSaturation" member="yes">
-																						<size>200,30</size>
+																						<size>130,30</size>
 																						<validator>wxGenericValidator(&amp;property__saturation)</validator>
 																						<handler function="OnSliderSaturationCmdScrollChanged" entry="EVT_COMMAND_SCROLL_CHANGED" />
 																					</object>
@@ -291,6 +293,7 @@
 																				<object class="sizeritem">
 																					<object class="wxTextCtrl" name="ID_TEXTCTRL_SATURATION" variable="TextCtrlSaturation" member="yes">
 																						<validator>wxIntegerValidator&lt;int&gt;(&amp;property__saturation)</validator>
+																						<size>60,28</size>
 																						<handler function="OnTextCtrlSaturationText" entry="EVT_TEXT" />
 																					</object>
 																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -312,7 +315,7 @@
 																				</object>
 																				<object class="sizeritem">
 																					<object class="wxSlider" name="ID_SLIDER_SHARPNESS" variable="SliderSharpness" member="yes">
-																						<size>200,30</size>
+																						<size>130,30</size>
 																						<validator>wxGenericValidator(&amp;property__sharpness)</validator>
 																						<handler function="OnSliderSharpnessCmdScrollChanged" entry="EVT_COMMAND_SCROLL_CHANGED" />
 																					</object>
@@ -323,6 +326,7 @@
 																				<object class="sizeritem">
 																					<object class="wxTextCtrl" name="ID_TEXTCTRL_SHARPNESS" variable="TextCtrlSharpness" member="yes">
 																						<validator>wxIntegerValidator&lt;int&gt;(&amp;property__sharpness)</validator>
+																						<size>60,28</size>
 																						<handler function="OnTextCtrlSharpnessText" entry="EVT_TEXT" />
 																					</object>
 																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -344,7 +348,7 @@
 																				</object>
 																				<object class="sizeritem">
 																					<object class="wxSlider" name="ID_SLIDER_GAMMA" variable="SliderGamma" member="yes">
-																						<size>200,30</size>
+																						<size>130,30</size>
 																						<validator>wxGenericValidator(&amp;property__gamma)</validator>
 																						<handler function="OnSliderGammaCmdScrollChanged" entry="EVT_COMMAND_SCROLL_CHANGED" />
 																					</object>
@@ -355,6 +359,7 @@
 																				<object class="sizeritem">
 																					<object class="wxTextCtrl" name="ID_TEXTCTRL_GAMMA" variable="TextCtrlGamma" member="yes">
 																						<validator>wxIntegerValidator&lt;int&gt;(&amp;property__gamma)</validator>
+																						<size>60,28</size>
 																						<handler function="OnTextCtrlGammaText" entry="EVT_TEXT" />
 																					</object>
 																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -376,7 +381,7 @@
 																				</object>
 																				<object class="sizeritem">
 																					<object class="wxSlider" name="ID_SLIDER_WB_BLUE" variable="SliderWhiteBalanceBlue" member="yes">
-																						<size>200,30</size>
+																						<size>130,30</size>
 																						<validator>wxGenericValidator(&amp;property__wb__blue)</validator>
 																						<handler function="OnSliderWhiteBalanceBlueCmdScrollChanged" entry="EVT_COMMAND_SCROLL_CHANGED" />
 																					</object>
@@ -387,6 +392,7 @@
 																				<object class="sizeritem">
 																					<object class="wxTextCtrl" name="ID_TEXTCTRL_WB_BLUE" variable="TextCtrlWhiteBalanceBlue" member="yes">
 																						<validator>wxIntegerValidator&lt;int&gt;(&amp;property__wb__blue)</validator>
+																						<size>60,28</size>
 																						<handler function="OnTextCtrlWhiteBalanceBlueText" entry="EVT_TEXT" />
 																					</object>
 																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -403,38 +409,6 @@
 																					<option>1</option>
 																				</object>
 																				<object class="sizeritem">
-																					<object class="wxStaticText" name="ID_STATICTEXT15" variable="StaticText8" member="yes">
-																						<label>White Balance (Red)</label>
-																					</object>
-																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-																					<border>5</border>
-																					<option>1</option>
-																				</object>
-																				<object class="sizeritem">
-																					<object class="wxSlider" name="ID_SLIDER_WB_RED" variable="SliderWhiteBalanceRed" member="yes">
-																						<size>200,30</size>
-																						<validator>wxGenericValidator(&amp;property__wb__red)</validator>
-																						<handler function="OnSliderWhiteBalanceRedCmdScrollChanged" entry="EVT_COMMAND_SCROLL_CHANGED" />
-																					</object>
-																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-																					<border>5</border>
-																					<option>1</option>
-																				</object>
-																				<object class="sizeritem">
-																					<object class="wxTextCtrl" name="ID_TEXTCTRL_WB_RED" variable="TextCtrlWhiteBalanceRed" member="yes">
-																						<validator>wxIntegerValidator&lt;int&gt;(&amp;property__wb__red)</validator>
-																						<handler function="OnTextCtrlWhiteBalanceRedText" entry="EVT_TEXT" />
-																					</object>
-																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-																					<border>5</border>
-																					<option>1</option>
-																				</object>
-																				<object class="spacer">
-																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-																					<border>5</border>
-																					<option>1</option>
-																				</object>
-																				<object class="sizeritem">
 																					<object class="wxStaticText" name="ID_STATICTEXT16" variable="StaticText9" member="yes">
 																						<label>Backlight</label>
 																					</object>
@@ -444,7 +418,7 @@
 																				</object>
 																				<object class="sizeritem">
 																					<object class="wxSlider" name="ID_SLIDER_BACKLIGHT" variable="SliderBacklight" member="yes">
-																						<size>200,30</size>
+																						<size>130,30</size>
 																						<validator>wxGenericValidator(&amp;property__backlight)</validator>
 																						<handler function="OnSliderBacklightCmdScrollChanged" entry="EVT_COMMAND_SCROLL_CHANGED" />
 																					</object>
@@ -455,12 +429,49 @@
 																				<object class="sizeritem">
 																					<object class="wxTextCtrl" name="ID_TEXTCTRL_BACKLIGHT" variable="TextCtrlBacklight" member="yes">
 																						<validator>wxIntegerValidator&lt;int&gt;(&amp;property__backlight)</validator>
+																						<size>60,28</size>
 																						<handler function="OnTextCtrlBacklightText" entry="EVT_TEXT" />
 																					</object>
 																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																					<border>5</border>
 																					<option>1</option>
 																				</object>
+																				
+																				<object class="spacer">
+																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																					<border>5</border>
+																					<option>1</option>
+																				</object>
+																				<object class="sizeritem">
+																					<object class="wxStaticText" name="ID_STATICTEXT15" variable="StaticText8" member="yes">
+																						<label>White Balance (Red)</label>
+																					</object>
+																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																					<border>5</border>
+																					<option>1</option>
+																				</object>
+																				<object class="sizeritem">
+																					<object class="wxSlider" name="ID_SLIDER_WB_RED" variable="SliderWhiteBalanceRed" member="yes">
+																						<size>130,30</size>
+																						<validator>wxGenericValidator(&amp;property__wb__red)</validator>
+																						<handler function="OnSliderWhiteBalanceRedCmdScrollChanged" entry="EVT_COMMAND_SCROLL_CHANGED" />
+																					</object>
+																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																					<border>5</border>
+																					<option>1</option>
+																				</object>
+																				<object class="sizeritem">
+																					<object class="wxTextCtrl" name="ID_TEXTCTRL_WB_RED" variable="TextCtrlWhiteBalanceRed" member="yes">
+																						<validator>wxIntegerValidator&lt;int&gt;(&amp;property__wb__red)</validator>
+																						<size>60,28</size>
+																						<handler function="OnTextCtrlWhiteBalanceRedText" entry="EVT_TEXT" />
+																					</object>
+																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																					<border>5</border>
+																					<option>1</option>
+																				</object>
+
+																				
 																				<object class="spacer">
 																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																					<border>5</border>
@@ -476,7 +487,7 @@
 																				</object>
 																				<object class="sizeritem">
 																					<object class="wxSlider" name="ID_SLIDER_GAIN" variable="SliderGain" member="yes">
-																						<size>200,30</size>
+																						<size>130,30</size>
 																						<validator>wxGenericValidator(&amp;property__gain)</validator>
 																						<handler function="OnSliderGainCmdScrollChanged" entry="EVT_COMMAND_SCROLL_CHANGED" />
 																					</object>
@@ -486,7 +497,8 @@
 																				</object>
 																				<object class="sizeritem">
 																					<object class="wxTextCtrl" name="ID_TEXTCTRL_GAIN" variable="TextCtrlGain" member="yes">
-																						<validator>wxIntegerValidator&lt;int&gt;(&amp;property__gain)</validator>
+																						<validator>wxIntegerValidator&lt;int&gt;(&amp;property__gain)</validator>						
+																						<size>60,28</size>
 																						<handler function="OnTextCtrlGainText" entry="EVT_TEXT" />
 																					</object>
 																					<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>

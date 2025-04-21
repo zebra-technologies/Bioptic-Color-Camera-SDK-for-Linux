@@ -1,3 +1,12 @@
+/***************************************************************
+ * Name:      CameraFirmwareDownload.h
+ * Purpose:   Defines Implementation of firmware download event
+ * Author:     ()
+ * Created:   2021-03-10
+ * Copyright: ©2022 Zebra Technologies Corp. and/or its affiliates.  All rights reserved.
+ * License:
+ **************************************************************/
+
 #ifndef CAMERA_FIRMWARE_DOWNLOAD_H_
 #define CAMERA_FIRMWARE_DOWNLOAD_H_
 
@@ -7,7 +16,7 @@
 
 using namespace zebra::camera_sdk;
 
-class ZebraCameraDemoFrame;
+class BiopticColorCameraDemoFrame;
 
 /*
     Firmware download event listener.
@@ -15,11 +24,11 @@ class ZebraCameraDemoFrame;
 class FirmwareDownloadEventObserver: public FirmwareDownloadEventListener
 {
 public:
-    FirmwareDownloadEventObserver(ZebraCameraDemoFrame *frame);
+    FirmwareDownloadEventObserver(BiopticColorCameraDemoFrame *frame);
 	void EventReceived(FirmwareDownloadEventsArgs event) override;
 
 private:
-    ZebraCameraDemoFrame *frame_;
+    BiopticColorCameraDemoFrame *frame_;
 };
 
 // Declaration of the CAMERA_FIRMWARE_DOWNLOAD_EVENT. Notify when a camera object is created.

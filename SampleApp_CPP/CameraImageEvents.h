@@ -7,71 +7,37 @@
 
 using namespace zebra::camera_sdk;
 
-class ZebraCameraDemoFrame;
+class BiopticColorCameraDemoFrame;
 
-/*
-    Continuous image event listener.
-*/
-class ContinuousImageObserver: public ContinuousImageEventListener
-{
-public:
-	ContinuousImageObserver(ZebraCameraDemoFrame *frame);
-	void ImageReceived(ImageEventData image, ImageEventMetaData md) override;
 
-private:
-    ZebraCameraDemoFrame *frame_;
-};
 
-/*
-    Produce image event listener.
-*/
-class ProduceImageObserver: public ProduceImageEventListener
-{
-public:
-	ProduceImageObserver(ZebraCameraDemoFrame *frame);
-	void ImageReceived(ImageEventData image, ImageEventMetaData md) override;
+// Snapshot image event listener.
 
-private:
-    ZebraCameraDemoFrame *frame_;
-};
-
-/*
-    Snapshot image event listener.
-*/
 class SnapshotImageObserver: public SnapshotImageEventListener
 {
 public:
-	SnapshotImageObserver(ZebraCameraDemoFrame *frame);
-	void ImageReceived(ImageEventData image, ImageEventMetaData md) override;
+	SnapshotImageObserver(BiopticColorCameraDemoFrame *frame);
+
+    //Method to convert color when a snapshot image is received
+	void ImageReceived(ImageEventData image, ImageEventMetaData meta_data) override;
 
 private:
-    ZebraCameraDemoFrame *frame_;
+    BiopticColorCameraDemoFrame *frame_;
 };
 
-/*
-    Decode image event listener.
-*/
-class DecodeImageObserver: public DecodeImageEventListener
+
+// Continuous image event listener.
+
+class ContinuousImageObserver: public ContinuousImageEventListener
 {
 public:
-	DecodeImageObserver(ZebraCameraDemoFrame *frame);
-	void ImageReceived(ImageEventData image, ImageEventMetaData md) override;
+	ContinuousImageObserver(BiopticColorCameraDemoFrame *frame);
+
+    //Method to convert color when a continuous image is received
+	void ImageReceived(ImageEventData image, ImageEventMetaData meta_data) override;
 
 private:
-    ZebraCameraDemoFrame *frame_;
-};
-
-/*
-    Decode session status change event listener.
-*/
-class DecodeSessionStatusChangeEventObserver: public DecodeSessionStatusChangeEventListener
-{
-public:
-	DecodeSessionStatusChangeEventObserver(ZebraCameraDemoFrame *frame);
-	void DecodeSessionStatusChanged(DecodeSessionStatus status) override;
-
-private:
-    ZebraCameraDemoFrame *frame_;
+    BiopticColorCameraDemoFrame *frame_;
 };
 
 
